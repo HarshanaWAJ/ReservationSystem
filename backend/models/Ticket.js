@@ -1,5 +1,4 @@
-// Encapsulates the tickets relation operations
-class Ticket {   
+class TicketClass {   
     // constructor
     constructor(ticketId, quantity, unitPrice) {
         this.ticketId = ticketId
@@ -8,10 +7,10 @@ class Ticket {
         this.sold = 0;
     }
 
-    //calculate the total price
+  //calculate the total price
    calculateTotPrice(unitPrice, quantity, discountRate) {
         var discountPrice = quantity * unitPrice * (discountRate/100);
-        var totPrice = (unitPrice * quantity)-discountPrice;
+        var totPrice = (unitPrice * quantity) - discountPrice;
         console.log("Unit Price: ", unitPrice);
         console.log("Quantity: ", quantity);
         console.log("Discount: ", discountPrice);
@@ -41,6 +40,14 @@ const ticketSchema = new mongoose.Schema(
       required: [true, 'Unit price is required'],
       min: [0, 'Price must be a positive value'], // Ensure non-negative price
     },
+    soldCount: {
+      type: Number,
+      default: 0,
+    },
+    availableCount: {
+      type: Number,
+      default: function() { return this.quantity; }
+    }
   },
   {
     timestamps: true, // Automatically add createdAt and updatedAt fields
