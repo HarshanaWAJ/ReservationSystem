@@ -6,7 +6,8 @@ require('dotenv').config();
 
 
 // Routes
-const ticketRoutes = require('../routes/ticketRoutes'); // Import ticket routes
+const ticketRoutes = require('../routes/ticketRoutes'); 
+const eventRoutes = require('../routes/eventRoutes');
 
 const app = express();
 
@@ -15,8 +16,9 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev')); // log HTTP requests
 
-// Use the ticket routes and set the prefix to /api/tickets
-app.use('/api/tickets', ticketRoutes);  
+// Use the ticket routes
+app.use('/api/tickets', ticketRoutes); 
+app.use('/api/events', eventRoutes); 
 
 // Connect to the Database
 connectDB();
